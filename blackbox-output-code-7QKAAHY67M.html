@@ -3,353 +3,191 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Manutenção de Faróis - Comparativo Avançado</title>
+<title>Polimento de Faróis Premium</title>
 <style>
-  /* Cores base */
+  /* Paleta de cores inspirada na Apple */
   :root {
-    --primary-color: #004080;
-    --secondary-color: #007700;
-    --background-color: #f2f2f2;
-    --text-color: #333333;
-    --highlight-color: #009933;
-    --slider-color: #007700;
+    --color-bg: #f5f5f7;
+    --color-text: #1d1d1f;
+    --color-subtext: #6e6e73;
+    --color-accent: #0071e3;
+    --color-white: #ffffff;
+    --color-border: #d2d2d7;
+  }
+
+  /* Reset básico */
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
 
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--background-color);
     margin: 0;
-    padding: 0;
-    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  a:hover,
+  a:focus {
+    text-decoration: underline;
   }
 
   header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 25px 20px;
+    background-color: var(--color-white);
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
     text-align: center;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  }
+
+  header h1 {
+    font-weight: 600;
+    font-size: 2.25rem;
+    margin: 0;
   }
 
   main {
-    max-width: 960px;
-    margin: 40px auto 80px;
-    background: white;
-    padding: 40px 35px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    max-width: 900px;
+    margin: 3rem auto 5rem;
+    padding: 0 1.5rem;
   }
 
-  h1, h2 {
-    margin-top: 0;
-    color: var(--primary-color);
+  .intro {
+    text-align: center;
+    margin-bottom: 3rem;
   }
 
-  p {
-    line-height: 1.6;
-    font-size: 1.1em;
+  .intro h2 {
+    font-weight: 600;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .intro p {
+    font-size: 1.125rem;
+    color: var(--color-subtext);
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   .price {
-    font-size: 1.8em;
-    color: var(--secondary-color);
+    font-size: 2rem;
     font-weight: 700;
-    margin: 25px 0 40px;
+    color: var(--color-accent);
+    margin-top: 1rem;
   }
 
-  /* Seção comparativa avançada */
-  .comparison-wrapper {
-    margin-bottom: 50px;
-  }
-
-  .comparison-title {
-    font-weight: 700;
-    font-size: 1.6em;
-    margin-bottom: 15px;
-    border-bottom: 3px solid var(--highlight-color);
-    padding-bottom: 8px;
-  }
-
-  .comparison-container {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    height: 360px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    user-select: none;
-  }
-
-  .comparison-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .img-after {
-    position: relative;
-    z-index: 1;
-  }
-
-  .img-before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 50%;
-    overflow: hidden;
-    z-index: 2;
-    border-radius: 12px 0 0 12px;
-    box-shadow: inset -5px 0 8px -4px rgba(0,0,0,0.3);
-  }
-
-  .img-before img {
-    position: relative;
-    left: 0;
-    transition: left 0.3s ease;
-  }
-
-  .slider {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 5px;
-    height: 100%;
-    background: var(--slider-color);
-    cursor: ew-resize;
-    z-index: 3;
-    border-radius: 3px;
-    box-shadow: 0 0 8px var(--slider-color);
-    transition: background 0.3s ease;
-  }
-
-  .slider:hover {
-    background: var(--highlight-color);
-    box-shadow: 0 0 12px var(--highlight-color);
-  }
-
-  .labels {
+  /* Seção de comparação */
+  .comparison {
     display: flex;
-    justify-content: space-between;
-    margin-top: 12px;
-    font-weight: 700;
-    color: var(--primary-color);
-    font-size: 1.1em;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 4rem;
   }
 
-  /* Seção de múltiplos comparativos */
-  .multi-comparison {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 30px;
-  }
-
-  .comparison-card {
-    background: #fafafa;
-    border-radius: 10px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  .comparison-item {
+    background: var(--color-white);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
     overflow: hidden;
+    max-width: 420px;
+    width: 100%;
     display: flex;
     flex-direction: column;
   }
 
-  .comparison-card img {
-    height: 180px;
-    object-fit: cover;
+  .comparison-item img {
     width: 100%;
+    height: auto;
+    display: block;
   }
 
-  .comparison-card-content {
-    padding: 15px 20px;
-    flex-grow: 1;
-  }
-
-  .comparison-card-content h3 {
-    margin: 0 0 10px;
-    color: var(--secondary-color);
-  }
-
-  .comparison-card-content p {
-    font-size: 0.95em;
-    color: #555;
+  .comparison-item .caption {
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    text-align: center;
   }
 
   /* Contato */
   .contact {
-    margin-top: 50px;
-    border-top: 2px solid var(--primary-color);
-    padding-top: 30px;
+    background: var(--color-white);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    text-align: center;
   }
 
-  .contact h2 {
-    margin-bottom: 15px;
+  .contact h3 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .contact p {
-    font-size: 1.1em;
-    margin: 8px 0;
+    font-size: 1.125rem;
+    color: var(--color-subtext);
+    margin: 0.3rem 0;
   }
 
-  /* Rodapé fixo */
   footer {
     text-align: center;
-    padding: 18px 10px;
-    background: var(--primary-color);
-    color: white;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    font-size: 0.9em;
-    box-shadow: 0 -3px 8px rgba(0,0,0,0.3);
+    padding: 1.5rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-subtext);
   }
 
   /* Responsividade */
-  @media (max-width: 700px) {
-    .comparison-container {
-      height: 280px;
-    }
-    .comparison-card img {
-      height: 140px;
+  @media (max-width: 600px) {
+    .comparison {
+      flex-direction: column;
+      align-items: center;
     }
   }
 </style>
 </head>
 <body>
 <header>
-  <h1>Manutenção de Faróis de Carros</h1>
+  <h1>Polimento de Faróis Premium</h1>
 </header>
 <main>
-  <p>Serviço profissional de restauração e manutenção de faróis para melhorar a visibilidade e estética do seu veículo.</p>
-  <p class="price">Preço: 25 euros por farol</p>
-
-  <section class="comparison-wrapper">
-    <h2 class="comparison-title">Comparativo Avançado: Antes e Depois da Manutenção</h2>
-    <div class="comparison-container" id="comparison">
-      <div class="img-after">
-        <img src="https://i.imgur.com/7Q9QXqv.jpg" alt="Farol Depois da Manutenção" />
-      </div>
-      <div class="img-before" id="img-before">
-        <img src="https://i.imgur.com/0Xq6Xqv.jpg" alt="Farol Antes da Manutenção" />
-      </div>
-      <div class="slider" id="slider" aria-label="Controle deslizante para comparar imagens antes e depois" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></div>
-    </div>
-    <div class="labels">
-      <span>Antes</span>
-      <span>Depois</span>
-    </div>
+  <section class="intro" aria-label="Introdução ao serviço">
+    <h2>Deixe seus faróis como novos</h2>
+    <p>Serviço profissional de polimento de faróis para restaurar a transparência, melhorar a visibilidade e valorizar seu veículo.</p>
+    <p class="price">Preço: 30 euros por farol</p>
   </section>
 
-  <section>
-    <h2 class="comparison-title">Outros Casos de Sucesso</h2>
-    <div class="multi-comparison">
-      <div class="comparison-card">
-        <img src="https://i.imgur.com/1Xq6Xqv.jpg" alt="Farol amarelado antes" />
-        <img src="https://i.imgur.com/2Q9QXqv.jpg" alt="Farol restaurado depois" style="display:none;" />
-        <div class="comparison-card-content">
-          <h3>Farol Amarelado</h3>
-          <p>Restauração completa que removeu o amarelado e recuperou a transparência original, melhorando a segurança noturna.</p>
-        </div>
-      </div>
-      <div class="comparison-card">
-        <img src="https://i.imgur.com/3Xq6Xqv.jpg" alt="Farol riscado antes" />
-        <img src="https://i.imgur.com/4Q9QXqv.jpg" alt="Farol polido depois" style="display:none;" />
-        <div class="comparison-card-content">
-          <h3>Farol Riscado</h3>
-          <p>Polimento profissional que eliminou riscos profundos, restaurando o brilho e a eficiência da iluminação.</p>
-        </div>
-      </div>
-      <div class="comparison-card">
-        <img src="https://i.imgur.com/5Xq6Xqv.jpg" alt="Farol opaco antes" />
-        <img src="https://i.imgur.com/6Q9QXqv.jpg" alt="Farol limpo depois" style="display:none;" />
-        <div class="comparison-card-content">
-          <h3>Farol Opaco</h3>
-          <p>Limpeza e tratamento que devolveram a clareza, aumentando a visibilidade e o valor estético do veículo.</p>
-        </div>
-      </div>
-    </div>
+  <section class="comparison" aria-label="Comparação antes e depois do polimento">
+    <article class="comparison-item">
+      <img src="images/farol-antes.jpg" alt="Farol antes do polimento" />
+      <div class="caption">Antes</div>
+    </article>
+    <article class="comparison-item">
+      <img src="images/farol-depois.jpg" alt="Farol depois do polimento" />
+      <div class="caption">Depois</div>
+    </article>
   </section>
 
-  <section class="contact">
-    <h2>Contato</h2>
-    <p>Email: contato@manutencaofarois.com</p>
+  <section class="contact" aria-label="Informações de contato">
+    <h3>Contato</h3>
+    <p>Email: contato@polimentofarois.com</p>
     <p>Telefone: +55 11 99999-9999</p>
   </section>
 </main>
 <footer>
-  &copy; 2025 Manutenção de Faróis - Todos os direitos reservados
+  &copy; 2025 Polimento de Faróis Premium. Todos os direitos reservados.
 </footer>
-
-<script>
-  // Slider interativo para comparação antes e depois
-  const comparison = document.getElementById('comparison');
-  const imgBefore = document.getElementById('img-before');
-  const slider = document.getElementById('slider');
-  let isDragging = false;
-
-  function setPosition(x) {
-    const rect = comparison.getBoundingClientRect();
-    let position = x - rect.left;
-    if (position < 0) position = 0;
-    if (position > rect.width) position = rect.width;
-    imgBefore.style.width = position + 'px';
-    slider.style.left = position + 'px';
-
-    // Atualiza atributo aria-valuenow para acessibilidade
-    let percent = Math.round((position / rect.width) * 100);
-    slider.setAttribute('aria-valuenow', percent);
-  }
-
-  slider.addEventListener('mousedown', () => {
-    isDragging = true;
-  });
-
-  window.addEventListener('mouseup', () => {
-    isDragging = false;
-  });
-
-  window.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    setPosition(e.clientX);
-  });
-
-  // Toque para dispositivos móveis
-  slider.addEventListener('touchstart', () => {
-    isDragging = true;
-  });
-
-  window.addEventListener('touchend', () => {
-    isDragging = false;
-  });
-
-  window.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    setPosition(e.touches[0].clientX);
-  });
-
-  // Inicializa slider no meio
-  window.addEventListener('load', () => {
-    const rect = comparison.getBoundingClientRect();
-    setPosition(rect.width / 2);
-  });
-
-  // Acessibilidade: controle via teclado
-  slider.addEventListener('keydown', (e) => {
-    const rect = comparison.getBoundingClientRect();
-    let currentWidth = imgBefore.getBoundingClientRect().width;
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      let newPos = currentWidth - 15;
-      if (newPos < 0) newPos = 0;
-      setPosition(rect.left + newPos);
-    } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
-      e.preventDefault();
-      let newPos = currentWidth + 15;
-      if (newPos > rect.width) newPos = rect.width;
-      setPosition(rect.left + newPos);
-    }
-  });
-</script>
 </body>
 </html>
